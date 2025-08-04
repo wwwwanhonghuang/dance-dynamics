@@ -17,11 +17,11 @@ follow entries should be specifies:
 - Protobuf_PROTOC_LIBRARY_RELEASE
 
 The library `/usr/lib/x86_64-linux-gnu/libprotobuf.so`
-should resided in `/usr/lib/x86_64-linux-gnu/`.
-
+should resided in `/usr/lib/x86_64-linux-gnu/` i installed by apt-get.
+It should be in anaconda home's `lib/libprotobuf.so`, or `envs/[environment_name]/lib/libprotobuf.so` it is installed by anaconda.
 
 Alternatively, 
-build protobuf manually, manually specify the path in the cmake-gui.
+we may also build protobuf manually, then manually specify the path in the cmake-gui:
 
 ## Build Protobuf from Source
 ``` bash
