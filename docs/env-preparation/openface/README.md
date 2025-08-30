@@ -1,8 +1,19 @@
 ## Build OpenFace from source
 
+### Quick Building
+``` bash
+conda activate dance-dynamics
+cd <repository-root>/docs/env-preparation/openface
+make build_opencv
+```
+The makefile utilize find the python root by using `which python`, i.e., find the current python that is in active.
+You may modify `Makefile` under `<repository-root>/docs/env-preparation/openface`
+and change the `PYTHON_ROOT` to the real python root
+
+
 ### Build OpenCV from source
 
-1. Clone and prepare opencv 4.12.0 source and `build` folder
+#### Clone and prepare opencv 4.12.0 source and `build` folder
  
 ``` bash
 cd <repository-root>
@@ -15,9 +26,9 @@ sudo mkdir build
 cd build
 ```
 
-2. prepare dependencies
+#### prepare dependencies
 
-- install `tbb`:
+##### install `tbb`:
 `sudo apt-get install libtbb-dev`
 
 
@@ -43,18 +54,18 @@ cp build/*_release/*.so* ./tbb_install/lib/
 cp -r include ./tbb_install/
 ```
 
-- install `openblas`
+##### install `openblas`
 
 `sudo apt-get install libopenblas-dev`
 
-3. Generate Makefile with `cmake`
+#### Generate Makefile with `cmake`
 
 For my case
 , without tbb
 ``` bash
  sudo cmake -D CMAKE_BUILD_TYPE=RELEASE   -D CMAKE_INSTALL_PREFIX=/usr/local   -D BUILD_TIFF=ON   -D WITH_TBB=OFF   -D BUILD_opencv_python3=ON   -D PYTHON3_EXECUTABLE=/home/<user>/anaconda3/envs/dance-dynamics/bin/python   -D PYTHON3_INCLUDE_DIR=$(/home/<user>/anaconda3/envs/dance-dynamics/bin/python -c "from sysconfig import get_paths as gp; print(gp()['include'])")   -D PYTHON3_LIBRARY=$(find /home/<user>/anaconda3/envs/dance-dynamics/lib -name 'libpython3.9*.so' | head -n 1) -D BUILD_opencv_python2=OFF  -D PYTHON2_EXECUTABLE="" -D CMAKE_CXX_FLAGS="$CMAKE_CXX_FLAGS -Wno-error=changes-meaning" ..
 ```
-
+> Replace `PYTHON3_EXECUTABLE`, `PYTHON3_INCLUDE_DIR`, `PYTHON3_LIBRARY` to the real paths.
 
 ``` bash
 cd /path/to/OpenFace/
