@@ -5,6 +5,7 @@
 1. Clone and prepare opencv 4.12.0 source and `build` folder
  
 ``` bash
+cd <repository-root>
 git clone --recursive https://github.com/TadasBaltrusaitis/OpenFace.git 
 cd OpenFace
 wget https://github.com/opencv/opencv/archive/4.12.0.zip

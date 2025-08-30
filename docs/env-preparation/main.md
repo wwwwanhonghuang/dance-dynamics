@@ -1,7 +1,7 @@
 1. create a new virtual environment (we use conda):
 
 ``` bash
-conda create dance-dynamics python=3.9
+conda create -n dance-dynamics python=3.9
 conda activate dynamics
 ```
 
