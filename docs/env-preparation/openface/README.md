@@ -9,9 +9,9 @@ cd <repository-root>
 git clone --recursive https://github.com/TadasBaltrusaitis/OpenFace.git 
 cd OpenFace
 wget https://github.com/opencv/opencv/archive/4.12.0.zip
-udo unzip 4.12.0.zip
+sudo unzip 4.12.0.zip
 cd opencv-4.12.0
-mkdir build
+sudo mkdir build
 cd build
 ```
 
@@ -42,7 +42,6 @@ mkdir -p ./tbb_install/lib
 cp build/*_release/*.so* ./tbb_install/lib/
 cp -r include ./tbb_install/
 ```
-
 
 - install `openblas`
 
