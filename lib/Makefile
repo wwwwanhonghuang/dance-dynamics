@@ -10,6 +10,9 @@ PYTHON3_INCLUDE_DIR := $(shell $(PYTHON_ROOT)/bin/python -c "from sysconfig impo
 PYTHON3_LIBRARY := $(shell find $(PYTHON_ROOT)/lib -name 'libpython3.9*.so' | head -n 1)
 PROTOBUF_INSTALL_DIR := $(REPOSITORY_LOCAL_LIB_ROOT)/install/protobuf
 
+
+all: build_abseil build_protobuf build_opencv
+
 # Clone Abseil source
 prepare_abseil_src:
 	@mkdir -p $(REPOSITORY_LOCAL_LIB_ROOT)
