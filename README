@@ -1,4 +1,11 @@
 # 1. Prepare Environment
 
-Step 1: prepare environment according document in [env-preparation-main](env-preparation/main.md)
+**Step 1**: 
+Clone this repository by
+``` bash
+git clone --recursive git@github.com:wwwwanhonghuang/dance-dynamics.git
+```
+
+**Step 2**: 
+prepare environment according document in [env-preparation-main](env-preparation/main.md)
 

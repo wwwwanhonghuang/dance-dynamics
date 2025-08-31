@@ -5,5 +5,5 @@ conda create -n dance-dynamics python=3.9
 conda activate dance-dynamics
 ```
 
-2. Build openface (see [openface](./openface/opencv-4.1.0.md))
+2. Build openface (see [openface](./openface/README.md))
 

@@ -7,9 +7,10 @@ cd <repository-root>/docs/env-preparation/openface
 make build_opencv
 make build_openface
 ```
-The makefile utilize find the python root by using `which python`, i.e., find the current python that is in active.
 
-Though utilizing the activating one of Python interpreter should work, alternatively, you may modify `Makefile` under `<repository-root>/docs/env-preparation/openface` and change the `PYTHON_ROOT` to the real Python root of the Python interpreter that you prefer to use.
+The command above will find the Python root by using `$(which python)`, i.e., it will find the Python interpreter which is current in active.
+
+Though utilizing the activating one of Python interpreter should work, alternatively, we can modify `Makefile` under `<repository-root>/docs/env-preparation/openface` and change the `PYTHON_ROOT` variable to the real root of the Python that we prefer to use.
 
 
 After building the OpenFace successfully,
