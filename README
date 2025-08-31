@@ -34,3 +34,7 @@ cd /path/to/repository_root
 cd projects/dance1
 make run_openface
 ```
+
+**step 6**: capture posees.
+
+
