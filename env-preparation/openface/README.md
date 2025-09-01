@@ -3,8 +3,7 @@
 ### Quick Building
 ``` bash
 conda activate dance-dynamics
-cd <repository-root>/docs/env-preparation/openface
-make build_opencv
+cd /path/to/repository_root/env-preparation/openface
 make build_openface
 ```
 

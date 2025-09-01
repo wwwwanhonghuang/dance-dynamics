@@ -1,12 +1,15 @@
-# Detect Python environment
+# Ask Python directly
 ACTIVATED_PYTHON_BIN := $(shell which python)
-PYTHON_ROOT := $(realpath $(ACTIVATED_PYTHON_BIN)/../..)
+PYTHON_VERSION := $(shell $(ACTIVATED_PYTHON_BIN) -c "import sys; print(f'{sys.version_info[0]}.{sys.version_info[1]}')")
+PYTHON_INCLUDE := $(shell $(ACTIVATED_PYTHON_BIN) -c "import sysconfig; print(sysconfig.get_path('include'))")
+PYTHON_LIBDIR  := $(shell $(ACTIVATED_PYTHON_BIN) -c "import sysconfig; print(sysconfig.get_config_var('LIBDIR'))")
+
 REPOSITORY_ROOT := $(realpath ..)
 REPOSITORY_LOCAL_LIB_ROOT := $(REPOSITORY_ROOT)/lib/
 OPENCV_VERSION := 4.12.0
 
 # Python include & library paths
-PYTHON3_INCLUDE_DIR := $(shell $(PYTHON_ROOT)/bin/python -c "from sysconfig import get_paths as gp; print(gp()['include'])")
+PYTHON3_INCLUDE_DIR := $(shell python -c "from sysconfig import get_paths as gp; print(gp()['include'])")
 PYTHON3_LIBRARY := $(shell find $(PYTHON_ROOT)/lib -name 'libpython3.9*.so' | head -n 1)
 PROTOBUF_INSTALL_DIR := $(REPOSITORY_LOCAL_LIB_ROOT)/install/protobuf
 
@@ -64,3 +67,22 @@ build_opencv:
 		-DCMAKE_CXX_FLAGS="-Wno-error=changes-meaning" && \
 	make -j$$(nproc) && \
 	make install
+
+build_boost:
+	cd ${REPOSITORY_LOCAL_LIB_ROOT} && \
+	if [ ! -d "boost" ]; then \
+		git clone --recursive https://github.com/boostorg/boost.git ; \
+	fi && \
+	cd boost && \
+	rm -rf bin.v2 stage && \
+	git pull && git submodule update --init --recursive && \
+	./bootstrap.sh --prefix=${REPOSITORY_LOCAL_LIB_ROOT}/install/boost \
+		--with-python=$(ACTIVATED_PYTHON_BIN)  \
+		--with-libraries=python,system,thread,filesystem && \
+	./b2 -j$$(nproc) \
+		--with-system \
+		python=$(shell python -c "import sys; print(f'{sys.version_info[0]}.{sys.version_info[1]}')") \
+		include=${PYTHON3_INCLUDE_DIR} \
+		library-path=${PYTHON_LIBDIR} \
+		link=shared threading=multi runtime-link=shared install
+
