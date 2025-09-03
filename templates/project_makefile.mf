@@ -1,9 +1,14 @@
 PROJECT_ROOT?=${PROJECT_ROOT}
 
 OPENFACE_ROOT := ${OPENFACE_ROOT}
+OPENPOSE_ROOT := ${OPENPOSE_ROOT}
+
 MOTION_OUT_DIR ?= ${MOTION_OUT_DIR}
 
 VIDEO_FILE_PATHS ?= ${VIDEO_FILE_PATHS}
+
+MOTION_CAPTURE_ROOT ?= ${MOTION_CAPTURE_ROOT}
+
 
 run_openface:
 	mkdir -p $(MOTION_OUT_DIR)
@@ -11,3 +16,11 @@ run_openface:
 	cd $(OPENFACE_ROOT) && \
 	./bin/FaceLandmarkVidMulti ${VIDEO_ARGS} -out_dir $(MOTION_OUT_DIR)/openface
 
+run_openpose:
+	mkdir -p $(MOTION_OUT_DIR)
+	@echo "MOTION_OUT_DIR=$(MOTION_OUT_DIR)"
+	cd $(OPENPOSE_ROOT) && \
+	export PYTHONPATH=$(OPENPOSE_ROOT)/python:$$PYTHONPATH; \
+	for VIDEO_FILE_PATH in ${VIDEO_FILE_PATHS}; do \
+		python ${MOTION_CAPTURE_ROOT}/openpose-cap.py --openpose_model_path ${OPENPOSE_ROOT}/models --input $${VIDEO_FILE_PATH} --frame_save_path ${MOTION_OUT_DIR}/openpose ; \
+	done;

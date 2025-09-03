@@ -10,8 +10,7 @@ PROJECT_ASSET_DIR := ${NORMALIZED_REPOSITORY_ROOT}/projects/${PROJECT_NAME}/asse
 
 make_project:
 	@mkdir -p $(PROJECT_ASSET_DIR)
-	# Convert each input path to absolute and build quoted list
-	@ABS_PATHS=""; \
+	ABS_PATHS=""; \
 	VIDEO_ARGS=""; \
 	IFS=','; \
 	for v in $$VIDEO_FILE_PATHS; do \
@@ -27,7 +26,11 @@ make_project:
 		OPENFACE_ROOT=${NORMALIZED_REPOSITORY_ROOT}/OpenFace/build \
 		VIDEO_FILE_PATHS="$$ABS_PATHS" \
 		MOTION_OUT_DIR=${NORMALIZED_REPOSITORY_ROOT}/projects/${PROJECT_NAME}/motion \
-		VIDEO_ARGS="$$VIDEO_ARGS" ; \
+		MOTION_CAPTURE_ROOT=${NORMALIZED_REPOSITORY_ROOT}/motion-capture \
+		OPENPOSE_ROOT=${NORMALIZED_REPOSITORY_ROOT}/lib/install/openpose \
+		VIDEO_FILE_PATH='$$$$VIDEO_FILE_PATH' \
+		PYTHONPATH='$$$$PYTHONPATH' \
+		VIDEO_ARGS='$$$$VIDEO_ARGS' ; \
 	for v in $$VIDEO_FILE_PATHS; do \
 	    cp "$$v" "$(PROJECT_ASSET_DIR)/"; \
 	done

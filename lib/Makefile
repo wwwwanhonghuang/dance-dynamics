@@ -14,7 +14,10 @@ PYTHON3_LIBRARY := $(shell find $(PYTHON_ROOT)/lib -name 'libpython3.9*.so' | he
 PROTOBUF_INSTALL_DIR := $(REPOSITORY_LOCAL_LIB_ROOT)/install/protobuf
 
 
-all: build_abseil build_protobuf build_opencv
+all: install_conda_dependencies build_abseil build_protobuf build_opencv
+
+install_conda_dependencies:
+	conda install -c conda-forge libstdcxx-ng --update-deps
 
 # Clone Abseil source
 prepare_abseil_src:
