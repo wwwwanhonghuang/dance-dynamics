@@ -12,7 +12,7 @@ git clone --recursive git@github.com:wwwwanhonghuang/dance-dynamics.git
 
 **Step 2**: 
 
-prepare environment according document in [env-preparation-main](env-preparation/main.md)
+prepare environment according document in [env-preparation-main](env-preparation/README.md)
 
 **step 3**:
 
